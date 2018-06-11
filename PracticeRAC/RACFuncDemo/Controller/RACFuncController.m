@@ -9,6 +9,9 @@
 #import "RACFuncController.h"
 #import "RACFuncViewModel.h"
 #import "NextControllerView.h"
+#import "Account.h"
+
+#import <YYModel/YYModel.h>
 
 @interface RACFuncController ()
 
@@ -33,7 +36,8 @@
 //    [self _concat];
 //    [self _then];
 //    [self _merge];
-    [self _combineLatest];
+//    [self _combineLatest];
+    [self _sequence];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -189,6 +193,35 @@
                 break;
         }
     }];
+}
+
+- (void)_sequence {
+    NSArray *numbers = @[@1, @2, @3, @4];
+    [numbers.rac_sequence.signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"Number array sequence signal: %@", x);
+    }];
+    
+    NSDictionary *profile = @{@"name": @"Oniityann", @"age": @26};
+    [profile.rac_sequence.signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"Profile dict sequence signal: %@", x);
+        RACTupleUnpack(NSString *key, NSString *value) = x;
+        NSLog(@"Profile key: %@, profile value: %@", key, value);
+    }];
+    
+    NSArray *fakeData = @[@{@"phone": @"18210263188", @"password": @"111111"},
+                          @{@"phone": @"18210281732", @"password": @"111111"},
+                          @{@"phone": @"18210263411", @"password": @"111111"},
+                          @{@"phone": @"13352489469", @"password": @"111111"},
+                          @{@"phone": @"13212311231", @"password": @"111111"},
+                          @{@"phone": @"13810111011", @"password": @"111111"}];
+    /// map:映射的意思，目的：把原始值value映射成一个新值
+    NSArray<Account *> *tableViewData = [fakeData.rac_sequence map:^id _Nullable(id  _Nullable value) {
+        NSLog(@"Sequence mapped value: %@", value);
+        return [Account yy_modelWithDictionary:value];
+    }].array;
+    
+    NSLog(@"Table view data source data: %@", tableViewData);
+    NSLog(@"Phone number of the third row of the table view: %@", tableViewData[2].phone);
 }
 
 - (RACFuncViewModel *)viewModel {

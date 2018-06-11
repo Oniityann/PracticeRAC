@@ -16,17 +16,27 @@ PODS:
     - AFNetworking/NSURLSession
   - Masonry (1.0.2)
   - ReactiveObjC (3.0.0)
+  - YYModel (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking
   - Masonry
   - ReactiveObjC
+  - YYModel
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - Masonry
+    - ReactiveObjC
+    - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: b08ddf873185632ce9898a54b1cd1adebdd629f2
+PODFILE CHECKSUM: 760f3b461ffe632debbfe583576db69578a90bc2
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.5.3
